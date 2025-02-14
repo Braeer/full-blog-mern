@@ -19,7 +19,7 @@ function App() {
     <>
       <Header />
       <Container maxWidth="lg">
-        <Routes>
+        <Routes baseName="/mern/">
           <Route path="/" element={<Home />} />
           <Route path="/posts/:id" element={<FullPost />} />
           <Route path="/posts/:id/edit" element={<AddPost />} />

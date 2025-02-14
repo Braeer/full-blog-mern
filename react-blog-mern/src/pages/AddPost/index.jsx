@@ -29,9 +29,6 @@ export const AddPost = () => {
 
   const isEditing = Boolean(id);
 
-
-
-  
   //#endregion
 
   const handleChangeFile = async (event) => {
@@ -152,7 +149,7 @@ export const AddPost = () => {
         <Button onClick={onSubmit} size="large" variant="contained">
           {isEditing ? 'Сохранить' : 'Опубликовать'}
         </Button>
-        <Link to="/">
+        <Link to="/mern">
           <Button size="large">Отмена</Button>
         </Link>
       </div>
