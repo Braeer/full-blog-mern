@@ -37,7 +37,7 @@ services:
   client:
     build: ./react-blog-mern
     ports:
-      - '3007:3007'
+      - '82:82'
     networks:
       - blog-v1
       - portfolio

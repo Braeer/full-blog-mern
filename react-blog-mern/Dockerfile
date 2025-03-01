@@ -8,14 +8,12 @@ RUN npm install --frozen-lockfile
 COPY . .
 RUN npm run build
 
-# Используем lightweight образ для запуска serve
-FROM node:18-alpine
+FROM nginx:alpine
 
-WORKDIR /app
+COPY --from=build /app/build /usr/share/nginx/html
 
-COPY --from=build /app/build ./build
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-RUN npm install -g serve
+EXPOSE 82
 
-EXPOSE 3007
-CMD ["serve", "-s", "build", "-l", "3007"]
+CMD ["nginx", "-g", "daemon off;"]

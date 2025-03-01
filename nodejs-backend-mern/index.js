@@ -36,28 +36,34 @@ const upload = multer({ storage });
 
 app.use(express.json());
 app.use(cors());
-app.use('/upload', express.static('uploads'));
+app.use('/api/upload', express.static('uploads'));
 
-app.post('/auth/login', loginValidation, handleValidationErrors, UserController.login);
-app.post('/auth/register', registerValidation, handleValidationErrors, UserController.register);
-app.get('/auth/me', checkAuth, UserController.getMe);
+app.post('/api/auth/login', loginValidation, handleValidationErrors, UserController.login);
+app.post('/api/auth/register', registerValidation, handleValidationErrors, UserController.register);
+app.get('/api/auth/me', checkAuth, UserController.getMe);
 
-app.post('/upload', checkAuth, upload.single('image'), (req, res) => {
+app.post('/api/upload', checkAuth, upload.single('image'), (req, res) => {
   res.json({
-    url: `/upload/${req.file.originalname}`,
+    url: `/api/upload/${req.file.originalname}`,
   });
 });
 
-app.get('/tags', PostController.getLastTags);
+app.get('/api/tags', PostController.getLastTags);
 
-app.get('/posts', PostController.getAll);
-app.get('/posts/tags', PostController.getLastTags);
-app.get('/posts/:id', PostController.getOne);
+app.get('/api/posts', PostController.getAll);
+app.get('/api/posts/tags', PostController.getLastTags);
+app.get('/api/posts/:id', PostController.getOne);
 
-app.post('/posts', checkAuth, postCreateValidation, handleValidationErrors, PostController.create);
-app.delete('/posts/:id', checkAuth, PostController.remove);
+app.post(
+  '/api/posts',
+  checkAuth,
+  postCreateValidation,
+  handleValidationErrors,
+  PostController.create,
+);
+app.delete('/api/posts/:id', checkAuth, PostController.remove);
 app.patch(
-  '/posts/:id',
+  '/api/posts/:id',
   checkAuth,
   postCreateValidation,
   handleValidationErrors,
