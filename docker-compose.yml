@@ -41,6 +41,8 @@ services:
     networks:
       - blog-v1
       - portfolio
+    depends_on:
+      - app
 
 volumes:
   db:
